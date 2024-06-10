@@ -1,13 +1,24 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:root_check/root_check.dart';
 import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  bool isRooted = await RootCheck.isRooted ?? false;
-  bool jailbroken = await FlutterJailbreakDetection.jailbroken;
+  Future<bool> checkForInsecureDevice() async {
+    if (Platform.isAndroid) {
+      return await RootCheck.isRooted ?? false;
+    } else if (Platform.isIOS) {
+      return await FlutterJailbreakDetection.jailbroken;
+    } else {
+      return false;
+    }
+  }
 
-  if (isRooted || jailbroken) {
+  bool isInsecureDevice = await checkForInsecureDevice();
+
+  if (isInsecureDevice) {
     runApp(const RootedDeviceApp());
   } else {
     runApp(const MyApp());
