@@ -1,7 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:root_check/root_check.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  bool? isRooted = await RootCheck.isRooted;
+
+  if (isRooted ?? false) {
+    runApp(const RootedDeviceApp());
+  } else {
+    runApp(const MyApp());
+  }
+}
+
+class RootedDeviceApp extends StatelessWidget {
+  const RootedDeviceApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text("Rooted Device Detected"),
+        ),
+        body: const Center(
+          child: Text("This app cannot run on rooted devices."),
+        ),
+      ),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
