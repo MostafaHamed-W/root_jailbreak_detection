@@ -1,8 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:root_check/root_check.dart';
+
 import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
+import 'package:root/root.dart';
 
 // Another approach we can use root_jailbreak_sniffer for android & iOS both
 // for more info check => https://medium.com/@romikavinda/flutter-root-and-jailbreak-detection-using-root-jailbreak-sniffer-plugin-9afcbb0ea2b5
@@ -11,7 +12,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Future<bool> checkForInsecureDevice() async {
     if (Platform.isAndroid) {
-      return await RootCheck.isRooted ?? false;
+      return await Root.isRooted() ?? false;
     } else if (Platform.isIOS) {
       return await FlutterJailbreakDetection.jailbroken;
     } else {

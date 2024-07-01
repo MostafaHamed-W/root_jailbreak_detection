@@ -32,7 +32,9 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_jailbreak_detection: ^1.10.0
-  root_check: ^0.0.2+1
+  root: ^2.0.4
+
+
 
 dev_dependencies:
   flutter_lints: ^3.0.0
