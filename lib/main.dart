@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 import 'package:root/root.dart';
+import 'package:root_jailbreak_detection/components/insecure_device_component.dart';
 
 // Another approach we can use root_jailbreak_sniffer for android & iOS both
 // for more info check => https://medium.com/@romikavinda/flutter-root-and-jailbreak-detection-using-root-jailbreak-sniffer-plugin-9afcbb0ea2b5
@@ -23,27 +24,9 @@ void main() async {
   bool isInsecureDevice = await checkForInsecureDevice();
 
   if (isInsecureDevice) {
-    runApp(const RootedDeviceApp());
+    runApp(const InsecureDeviceComponent());
   } else {
     runApp(const MyApp());
-  }
-}
-
-class RootedDeviceApp extends StatelessWidget {
-  const RootedDeviceApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Rooted Device Detected"),
-        ),
-        body: const Center(
-          child: Text("This app cannot run on rooted devices."),
-        ),
-      ),
-    );
   }
 }
 
